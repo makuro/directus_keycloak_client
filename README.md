@@ -1,0 +1,1 @@
+# directus_keycloak_client
