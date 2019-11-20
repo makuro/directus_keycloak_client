@@ -6,7 +6,7 @@
  * @category OAuth_2_Client_Library_Usage_For_Keycloak_With_Directus
  * @package  Makuro\Directus\KeycloakClient\Provider
  * @author   Eric Delaporte <eric.delaporte@build-ideas.de>
- * @license  MIT
+ * @license  https://opensource.org/licenses/MIT MIT
  * @link     https://packagist.org/packages/makuro/directus_keycloak_client
  * Date: 19.11.19
  * Time: 23:59
@@ -68,32 +68,12 @@ class Keycloak extends AbstractProvider
     public $encryptionKey = null;
 
     /**
-     * Constructs an OAuth 2.0 service provider.
-     *
-     * @param array $options An array of options to set on this provider.
-     *                       Options include `clientId`, `clientSecret`, `redirectUri`, and `state`.
-     *                       Individual providers may introduce more options, as needed.
-     * @param array $collaborators An array of collaborators that may be used to
-     *                             override this provider's default behavior. Collaborators include
-     *                             `grantFactory`, `requestFactory`, `httpClient`, and `randomFactory`.
-     *                             Individual providers may introduce more collaborators, as needed.
-     */
-    public function __construct(array $options = [], array $collaborators = [])
-    {
-        if (isset($options['encryptionKeyPath'])) {
-            $this->setEncryptionKeyPath($options['encryptionKeyPath']);
-            unset($options['encryptionKeyPath']);
-        }
-        parent::__construct($options, $collaborators);
-    }
-
-    /**
      * Attempts to decrypt the given response.
      *
+     * @throws EncryptionConfigurationException
      * @param string|array|null $response Response received
      *
      * @return string|array|null
-     * @throws EncryptionConfigurationException
      */
     public function decryptResponse($response)
     {
@@ -118,13 +98,36 @@ class Keycloak extends AbstractProvider
     }
 
     /**
+     * Constructs an OAuth 2.0 service provider.
+     *
+     * @param array $options An array of options to set on this provider.
+     *                       Options include `clientId`, `clientSecret`,
+     *                       `redirectUri`, and `state`.
+     *                       Individual providers may introduce more options, as needed.
+     * @param array $collaborators An array of collaborators that may be used to
+     *                             override this provider's default behavior.
+     *                             Collaborators include `grantFactory`,
+     *                             `requestFactory`, `httpClient`, and `randomFactory`.
+     *                             Individual providers may introduce more
+     *                             collaborators, as needed.
+     */
+    public function __construct(array $options = [], array $collaborators = [])
+    {
+        if (isset($options['encryptionKeyPath'])) {
+            $this->setEncryptionKeyPath($options['encryptionKeyPath']);
+            unset($options['encryptionKeyPath']);
+        }
+        parent::__construct($options, $collaborators);
+    }
+
+    /**
      * Get authorization url to begin OAuth flow
      *
      * @return string
      */
     public function getBaseAuthorizationUrl()
     {
-        return $this->getBaseUrlWithRealm().'/protocol/openid-connect/auth';
+        return $this->_getBaseUrlWithRealm().'/protocol/openid-connect/auth';
     }
 
     /**
@@ -136,7 +139,7 @@ class Keycloak extends AbstractProvider
      */
     public function getBaseAccessTokenUrl(array $params)
     {
-        return $this->getBaseUrlWithRealm().'/protocol/openid-connect/token';
+        return $this->_getBaseUrlWithRealm().'/protocol/openid-connect/token';
     }
 
     /**
@@ -148,13 +151,14 @@ class Keycloak extends AbstractProvider
      */
     public function getResourceOwnerDetailsUrl(AccessToken $token)
     {
-        return $this->getBaseUrlWithRealm().'/protocol/openid-connect/userinfo';
+        return $this->_getBaseUrlWithRealm().'/protocol/openid-connect/userinfo';
     }
 
     /**
      * Builds the logout URL.
      *
      * @param array $options options set for logout
+     *
      * @return string Authorization URL
      */
     public function getLogoutUrl(array $options = [])
@@ -172,7 +176,7 @@ class Keycloak extends AbstractProvider
      */
     private function getBaseLogoutUrl()
     {
-        return $this->getBaseUrlWithRealm() . '/protocol/openid-connect/logout';
+        return $this->_getBaseUrlWithRealm() . '/protocol/openid-connect/logout';
     }
 
     /**
@@ -180,7 +184,7 @@ class Keycloak extends AbstractProvider
      *
      * @return string
      */
-    protected function getBaseUrlWithRealm()
+    public function getBaseUrlWithRealm()
     {
         return $this->authServerUrl.'/realms/'.$this->realm;
     }
@@ -203,7 +207,7 @@ class Keycloak extends AbstractProvider
      *
      * @throws IdentityProviderException
      * @param ResponseInterface $response interface to give the response to
-     * @param string $data Parsed response data
+     * @param string            $data     Parsed response data
      *
      * @return void
      */
@@ -218,8 +222,8 @@ class Keycloak extends AbstractProvider
     /**
      * Generate a user object from a successful user details request.
      *
-     * @param array $response contains response informations
-     * @param AccessToken $token keycloaks access token
+     * @param array       $response contains response informations
+     * @param AccessToken $token    keycloaks access token
      *
      * @return KeycloakResourceOwner
      */
