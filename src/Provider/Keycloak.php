@@ -1,5 +1,10 @@
 <?php
-
+/**
+ * Application: directus_keycloak_client
+ * Author: Eric Delaporte <eric.delaporte@build-ideas.de>
+ * Date: 19.11.19
+ * Time: 23:59
+ */
 namespace Makuro\Directus\KeycloakClient\Provider;
 
 use Exception;
@@ -11,6 +16,10 @@ use League\OAuth2\Client\Tool\BearerAuthorizationTrait;
 use Makuro\Directus\KeycloakClient\Provider\Exception\EncryptionConfigurationException;
 use Psr\Http\Message\ResponseInterface;
 
+/**
+ * Class Keycloak
+ * @package Makuro\Directus\KeycloakClient\Provider
+ */
 class Keycloak extends AbstractProvider
 {
     use BearerAuthorizationTrait;
@@ -110,7 +119,7 @@ class Keycloak extends AbstractProvider
     /**
      * Get access token url to retrieve token
      *
-     * @param  array $params
+     * @param array $params
      *
      * @return string
      */
@@ -122,7 +131,7 @@ class Keycloak extends AbstractProvider
     /**
      * Get provider url to fetch user details
      *
-     * @param  AccessToken $token
+     * @param AccessToken $token
      *
      * @return string
      */
@@ -182,8 +191,8 @@ class Keycloak extends AbstractProvider
      * Check a provider response for errors.
      *
      * @throws IdentityProviderException
-     * @param  ResponseInterface $response
-     * @param  string $data Parsed response data
+     * @param ResponseInterface $response
+     * @param string $data Parsed response data
      * @return void
      */
     protected function checkResponse(ResponseInterface $response, $data)

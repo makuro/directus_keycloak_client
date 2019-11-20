@@ -1,9 +1,18 @@
 <?php
-
+/**
+ * Application: directus_keycloak_client
+ * Author: Eric Delaporte <eric.delaporte@build-ideas.de>
+ * Date: 19.11.19
+ * Time: 23:59
+ */
 namespace Makuro\Directus\KeycloakClient\Provider;
 
 use League\OAuth2\Client\Provider\ResourceOwnerInterface;
 
+/**
+ * Class KeycloakResourceOwner
+ * @package Makuro\Directus\KeycloakClient\Provider
+ */
 class KeycloakResourceOwner implements ResourceOwnerInterface
 {
     /**

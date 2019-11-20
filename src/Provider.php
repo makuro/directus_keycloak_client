@@ -1,19 +1,15 @@
 <?php
 /**
- * Application: directus
+ * Application: directus_keycloak_client
  * Author: Eric Delaporte <eric.delaporte@build-ideas.de>
- * Date: 13.11.19
- * Time: 15:13
+ * Date: 19.11.19
+ * Time: 23:59
  */
-
-
-namespace Directus\Authentication\Sso\Provider\Keycloak;
-
-require_once 'Provider/Keycloak.php';
-require_once 'Provider/KeycloakResourceOwner.php';
+namespace Makuro\Directus\KeycloakClient;
 
 use Directus\Authentication\Sso\TwoSocialProvider;
-use Directus\Authentication\Sso\Provider\Keycloak\Provider\Keycloak;
+use League\OAuth2\Client\Provider\AbstractProvider;
+use Makuro\Directus\KeycloakClient\Provider\Keycloak;
 
 class Provider extends TwoSocialProvider
 {
@@ -35,7 +31,7 @@ class Provider extends TwoSocialProvider
     /**
      * Creates the Google provider oAuth client
      *
-     * @return Google
+     * @return AbstractProvider
      */
     protected function createProvider()
     {

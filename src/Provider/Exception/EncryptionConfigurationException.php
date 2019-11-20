@@ -1,9 +1,18 @@
 <?php
-
+/**
+ * Application: directus_keycloak_client
+ * Author: Eric Delaporte <eric.delaporte@build-ideas.de>
+ * Date: 19.11.19
+ * Time: 23:59
+ */
 namespace Makuro\Directus\KeycloakClient\Provider\Exception;
 
 use Exception;
 
+/**
+ * Class EncryptionConfigurationException
+ * @package Makuro\Directus\KeycloakClient\Provider\Exception
+ */
 class EncryptionConfigurationException extends Exception
 {
     /**
