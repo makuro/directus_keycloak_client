@@ -38,13 +38,3 @@ script:
 after_script:
   - wget https://scrutinizer-ci.com/ocular.phar
   - php ocular.phar code-coverage:upload --format=php-clover ./coverage.clover.xml
-
-jobs:
-  include:
-    - stage: Static Code Analysis
-      php: 7.3
-      env: php-cs-fixer
-      install:
-        - phpenv config-rm xdebug.ini
-      script:
-        - ./tools/php-cs-fixer fix --dry-run -v --show-progress=dots --diff-format=udiff
