@@ -1,7 +1,12 @@
 <?php
 /**
+ * PHP version 7
  * Application: directus_keycloak_client
- * Author: Eric Delaporte <eric.delaporte@build-ideas.de>
+ * @package Makuro\Directus\KeycloakClient\Provider
+ * @author Eric Delaporte <eric.delaporte@build-ideas.de>
+ * @license MIT
+ * @link https://packagist.org/packages/makuro/directus_keycloak_client
+ * @category OAuth 2 Client library usage for keycloak with directus
  * Date: 19.11.19
  * Time: 23:59
  */
@@ -11,7 +16,13 @@ use League\OAuth2\Client\Provider\ResourceOwnerInterface;
 
 /**
  * Class KeycloakResourceOwner
+ *
  * @package Makuro\Directus\KeycloakClient\Provider
+ * @package Makuro\Directus\KeycloakClient\Provider
+ * @author Eric Delaporte <eric.delaporte@build-ideas.de>
+ * @license MIT
+ * @link https://packagist.org/packages/makuro/directus_keycloak_client
+ * @category OAuth 2 Client library usage for keycloak with directus
  */
 class KeycloakResourceOwner implements ResourceOwnerInterface
 {
@@ -25,7 +36,7 @@ class KeycloakResourceOwner implements ResourceOwnerInterface
     /**
      * Creates new resource owner.
      *
-     * @param array  $response
+     * @param array $response
      */
     public function __construct(array $response = array())
     {

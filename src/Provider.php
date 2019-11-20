@@ -14,12 +14,17 @@ use Makuro\Directus\KeycloakClient\Provider\Keycloak;
 class Provider extends TwoSocialProvider
 {
     /**
+     * holds the actual provider class
+     *
      * @var Keycloak
      */
     protected $provider = null;
 
     /**
-     * @inheritdoc
+     * returns scopes
+     *
+     * @inheritDoc
+     * @return array
      */
     public function getScopes()
     {

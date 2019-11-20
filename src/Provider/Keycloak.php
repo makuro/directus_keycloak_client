@@ -1,7 +1,12 @@
 <?php
 /**
+ * PHP version 7
  * Application: directus_keycloak_client
- * Author: Eric Delaporte <eric.delaporte@build-ideas.de>
+ * @package Makuro\Directus\KeycloakClient\Provider
+ * @author Eric Delaporte <eric.delaporte@build-ideas.de>
+ * @license MIT
+ * @link https://packagist.org/packages/makuro/directus_keycloak_client
+ * @category OAuth 2 Client library usage for keycloak with directus
  * Date: 19.11.19
  * Time: 23:59
  */
@@ -19,6 +24,10 @@ use Psr\Http\Message\ResponseInterface;
 /**
  * Class Keycloak
  * @package Makuro\Directus\KeycloakClient\Provider
+ * @author Eric Delaporte <eric.delaporte@build-ideas.de>
+ * @license MIT
+ * @link https://packagist.org/packages/makuro/directus_keycloak_client
+ * @category OAuth 2 Client library usage for keycloak with directus
  */
 class Keycloak extends AbstractProvider
 {
@@ -60,12 +69,12 @@ class Keycloak extends AbstractProvider
      * Constructs an OAuth 2.0 service provider.
      *
      * @param array $options An array of options to set on this provider.
-     *     Options include `clientId`, `clientSecret`, `redirectUri`, and `state`.
-     *     Individual providers may introduce more options, as needed.
+     *                       Options include `clientId`, `clientSecret`, `redirectUri`, and `state`.
+     *                       Individual providers may introduce more options, as needed.
      * @param array $collaborators An array of collaborators that may be used to
-     *     override this provider's default behavior. Collaborators include
-     *     `grantFactory`, `requestFactory`, `httpClient`, and `randomFactory`.
-     *     Individual providers may introduce more collaborators, as needed.
+     *                             override this provider's default behavior. Collaborators include
+     *                             `grantFactory`, `requestFactory`, `httpClient`, and `randomFactory`.
+     *                             Individual providers may introduce more collaborators, as needed.
      */
     public function __construct(array $options = [], array $collaborators = [])
     {
@@ -79,7 +88,7 @@ class Keycloak extends AbstractProvider
     /**
      * Attempts to decrypt the given response.
      *
-     * @param string|array|null $response
+     * @param string|array|null $response Response received
      *
      * @return string|array|null
      * @throws EncryptionConfigurationException
@@ -119,7 +128,7 @@ class Keycloak extends AbstractProvider
     /**
      * Get access token url to retrieve token
      *
-     * @param array $params
+     * @param array $params params read from url
      *
      * @return string
      */
@@ -131,7 +140,7 @@ class Keycloak extends AbstractProvider
     /**
      * Get provider url to fetch user details
      *
-     * @param AccessToken $token
+     * @param AccessToken $token access token provided by keycloak
      *
      * @return string
      */
@@ -143,7 +152,7 @@ class Keycloak extends AbstractProvider
     /**
      * Builds the logout URL.
      *
-     * @param array $options
+     * @param array $options options set for logout
      * @return string Authorization URL
      */
     public function getLogoutUrl(array $options = [])
@@ -191,8 +200,9 @@ class Keycloak extends AbstractProvider
      * Check a provider response for errors.
      *
      * @throws IdentityProviderException
-     * @param ResponseInterface $response
+     * @param ResponseInterface $response interface to give the response to
      * @param string $data Parsed response data
+     *
      * @return void
      */
     protected function checkResponse(ResponseInterface $response, $data)
@@ -206,8 +216,9 @@ class Keycloak extends AbstractProvider
     /**
      * Generate a user object from a successful user details request.
      *
-     * @param array $response
-     * @param AccessToken $token
+     * @param array $response contains response informations
+     * @param AccessToken $token keycloaks access token
+     *
      * @return KeycloakResourceOwner
      */
     protected function createResourceOwner(array $response, AccessToken $token)
@@ -218,7 +229,7 @@ class Keycloak extends AbstractProvider
     /**
      * Requests and returns the resource owner of given access token.
      *
-     * @param AccessToken $token
+     * @param AccessToken $token keycloak access token
      *
      * @return KeycloakResourceOwner
      * @throws EncryptionConfigurationException
@@ -235,7 +246,7 @@ class Keycloak extends AbstractProvider
     /**
      * Updates expected encryption algorithm of Keycloak instance.
      *
-     * @param string  $encryptionAlgorithm
+     * @param string $encryptionAlgorithm algorithm to be used
      *
      * @return Keycloak
      */
@@ -249,7 +260,7 @@ class Keycloak extends AbstractProvider
     /**
      * Updates expected encryption key of Keycloak instance.
      *
-     * @param string  $encryptionKey
+     * @param string $encryptionKey encryption key to use
      *
      * @return Keycloak
      */
@@ -264,7 +275,7 @@ class Keycloak extends AbstractProvider
      * Updates expected encryption key of Keycloak instance to content of given
      * file path.
      *
-     * @param string  $encryptionKeyPath
+     * @param string $encryptionKeyPath encryption key path to use
      *
      * @return Keycloak
      */
