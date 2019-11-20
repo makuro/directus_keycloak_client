@@ -33,7 +33,7 @@ before_script:
 
 script:
   - ./vendor/bin/phpcs src/
-  - ./vendor/bin/phpunit --coverage-text --coverage-clover=./coverage.clover.xml ./test/src/KeycloakTest.php
+  - ./vendor/bin/phpunit --coverage-text --whitelist ./src --coverage-clover=./coverage.clover.xml ./test/src/KeycloakTest.php
 
 after_script:
   - wget https://scrutinizer-ci.com/ocular.phar
