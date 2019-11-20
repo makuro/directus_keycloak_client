@@ -6,15 +6,45 @@ php:
   - 7.2
   - 7.3
 
+env:
+  matrix:
+    - DRIVER="xdebug" DEPENDENCIES="high"
+    - DRIVER="phpdbg" DEPENDENCIES="high"
+    - DRIVER="pcov"   DEPENDENCIES="high"
+    - DRIVER="xdebug" DEPENDENCIES="low"
+    - DRIVER="phpdbg" DEPENDENCIES="low"
+    - DRIVER="pcov"   DEPENDENCIES="low"
+
 before_script:
   - travis_retry composer self-update
   - travis_retry composer install --no-interaction --prefer-source
   - travis_retry phpenv rehash
+  - |
+    if [[ "$DRIVER" = 'pcov' ]]; then
+      echo > $HOME/.phpenv/versions/$TRAVIS_PHP_VERSION/etc/conf.d/xdebug.ini
+      git clone --single-branch --branch=v1.0.6 --depth=1 https://github.com/krakjoe/pcov
+      cd pcov
+      phpize
+      ./configure
+      make clean install
+      echo "extension=pcov.so" > $HOME/.phpenv/versions/$TRAVIS_PHP_VERSION/etc/conf.d/pcov.ini
+      cd $TRAVIS_BUILD_DIR
+    fi
 
 script:
   - ./vendor/bin/phpcs src/
-  - ./vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover
+  - ./vendor/bin/phpunit --coverage-text --coverage-clover=./coverage.clover.xml ./test/src/KeycloakTest.php
 
 after_script:
   - wget https://scrutinizer-ci.com/ocular.phar
-  - php ocular.phar code-coverage:upload --format=php-clover coverage.clover
+  - php ocular.phar code-coverage:upload --format=php-clover ./coverage.clover.xml
+
+jobs:
+  include:
+    - stage: Static Code Analysis
+      php: 7.3
+      env: php-cs-fixer
+      install:
+        - phpenv config-rm xdebug.ini
+      script:
+        - ./tools/php-cs-fixer fix --dry-run -v --show-progress=dots --diff-format=udiff
