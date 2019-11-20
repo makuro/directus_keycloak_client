@@ -19,7 +19,7 @@ use League\OAuth2\Client\Provider\AbstractProvider;
 use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
 use League\OAuth2\Client\Token\AccessToken;
 use League\OAuth2\Client\Tool\BearerAuthorizationTrait;
-use Makuro\Directus\KeycloakClient\Provider\Exception\EncryptionConfigurationException;
+use Makuro\Directus\KeycloakClient\Provider\Exception\EncryptionConfigurationException; // @codingStandardsIgnoreLine
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -100,14 +100,17 @@ class Keycloak extends AbstractProvider
     /**
      * Constructs an OAuth 2.0 service provider.
      *
-     * @param array $options An array of options to set on this provider.
-     *                       Options include `clientId`, `clientSecret`,
-     *                       `redirectUri`, and `state`.
-     *                       Individual providers may introduce more options, as needed.
+     * @param array $options       An array of options to set on this
+     *                             provider.
+     *                             Options include `clientId`, `clientSecret`,
+     *                             `redirectUri`, and `state`.
+     *                             Individual providers may introduce more
+     *                             options, as needed.
      * @param array $collaborators An array of collaborators that may be used to
      *                             override this provider's default behavior.
      *                             Collaborators include `grantFactory`,
-     *                             `requestFactory`, `httpClient`, and `randomFactory`.
+     *                             `requestFactory`, `httpClient`, and
+     *                             `randomFactory`.
      *                             Individual providers may introduce more
      *                             collaborators, as needed.
      */
@@ -127,7 +130,7 @@ class Keycloak extends AbstractProvider
      */
     public function getBaseAuthorizationUrl()
     {
-        return $this->_getBaseUrlWithRealm().'/protocol/openid-connect/auth';
+        return $this->getBaseUrlWithRealm().'/protocol/openid-connect/auth';
     }
 
     /**
@@ -139,7 +142,7 @@ class Keycloak extends AbstractProvider
      */
     public function getBaseAccessTokenUrl(array $params)
     {
-        return $this->_getBaseUrlWithRealm().'/protocol/openid-connect/token';
+        return $this->getBaseUrlWithRealm().'/protocol/openid-connect/token';
     }
 
     /**
@@ -151,7 +154,7 @@ class Keycloak extends AbstractProvider
      */
     public function getResourceOwnerDetailsUrl(AccessToken $token)
     {
-        return $this->_getBaseUrlWithRealm().'/protocol/openid-connect/userinfo';
+        return $this->getBaseUrlWithRealm().'/protocol/openid-connect/userinfo';
     }
 
     /**
@@ -174,9 +177,9 @@ class Keycloak extends AbstractProvider
      *
      * @return string
      */
-    private function getBaseLogoutUrl()
+    private function getBaseLogoutUrl() // @codingStandardsIgnoreLine
     {
-        return $this->_getBaseUrlWithRealm() . '/protocol/openid-connect/logout';
+        return $this->getBaseUrlWithRealm() . '/protocol/openid-connect/logout';
     }
 
     /**
@@ -206,8 +209,9 @@ class Keycloak extends AbstractProvider
      * Check a provider response for errors.
      *
      * @throws IdentityProviderException
-     * @param ResponseInterface $response interface to give the response to
-     * @param string            $data     Parsed response data
+     * 
+     * @param  ResponseInterface $response interface to give the response to
+     * @param  string            $data     Parsed response data
      *
      * @return void
      */
