@@ -70,8 +70,9 @@ class Keycloak extends AbstractProvider
     /**
      * Attempts to decrypt the given response.
      *
-     * @throws EncryptionConfigurationException
      * @param string|array|null $response Response received
+     *
+     * @throws EncryptionConfigurationException
      *
      * @return string|array|null
      */
@@ -208,10 +209,10 @@ class Keycloak extends AbstractProvider
     /**
      * Check a provider response for errors.
      *
+     * @param ResponseInterface $response interface to give the response to
+     * @param string            $data     Parsed response data
+     *
      * @throws IdentityProviderException
-     * 
-     * @param  ResponseInterface $response interface to give the response to
-     * @param  string            $data     Parsed response data
      *
      * @return void
      */
