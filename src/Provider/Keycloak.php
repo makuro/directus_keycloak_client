@@ -2,11 +2,12 @@
 /**
  * PHP version 7
  * Application: directus_keycloak_client
- * @package Makuro\Directus\KeycloakClient\Provider
- * @author Eric Delaporte <eric.delaporte@build-ideas.de>
- * @license MIT
- * @link https://packagist.org/packages/makuro/directus_keycloak_client
- * @category OAuth 2 Client library usage for keycloak with directus
+ *
+ * @category OAuth_2_Client_Library_Usage_For_Keycloak_With_Directus
+ * @package  Makuro\Directus\KeycloakClient\Provider
+ * @author   Eric Delaporte <eric.delaporte@build-ideas.de>
+ * @license  MIT
+ * @link     https://packagist.org/packages/makuro/directus_keycloak_client
  * Date: 19.11.19
  * Time: 23:59
  */
@@ -23,11 +24,12 @@ use Psr\Http\Message\ResponseInterface;
 
 /**
  * Class Keycloak
- * @package Makuro\Directus\KeycloakClient\Provider
- * @author Eric Delaporte <eric.delaporte@build-ideas.de>
- * @license MIT
- * @link https://packagist.org/packages/makuro/directus_keycloak_client
- * @category OAuth 2 Client library usage for keycloak with directus
+ *
+ * @category OAuth_2_Client_Library_Usage_For_Keycloak_With_Directus
+ * @package  Makuro\Directus\KeycloakClient\Provider
+ * @author   Eric Delaporte <eric.delaporte@build-ideas.de>
+ * @license  https://opensource.org/licenses/MIT MIT
+ * @link     https://packagist.org/packages/makuro/directus_keycloak_client
  */
 class Keycloak extends AbstractProvider
 {
